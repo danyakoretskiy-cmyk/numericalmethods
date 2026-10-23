@@ -1,5 +1,5 @@
 import math
-import matplotlib.pyplot as plt
+import matplotlib.pyplot
 
 EPS = 0.001
 
@@ -45,17 +45,17 @@ def iteration_method(phi, x0, q, eps=EPS, max_iter=1000):
 def plot_graph(f, a, b, root, title):
     xs = [a + (b-a)*i/500 for i in range(501)]
     ys = [f(x) for x in xs]
-    plt.figure(figsize=(8, 4.8))
-    plt.plot(xs, ys, label='f(x)')
-    plt.axhline(0, color='black', linewidth=0.8)
-    plt.plot(root, 0, 'ro', label=f'Корень = {root:.6f}')
-    plt.axvline(root, color='red', linestyle='--', alpha=0.5)
-    plt.title(title)
-    plt.xlabel('x')
-    plt.ylabel('f(x)')
-    plt.grid(True, alpha=0.3)
-    plt.legend()
-    plt.tight_layout()
+    matplotlib.pyplot.figure(figsize=(8, 4.8))
+    matplotlib.pyplot.plot(xs, ys, label='f(x)')
+    matplotlib.pyplot.axhline(0, color='black', linewidth=0.8)
+    matplotlib.pyplot.plot(root, 0, 'ro', label=f'Корень = {root:.6f}')
+    matplotlib.pyplot.axvline(root, color='red', linestyle='--', alpha=0.5)
+    matplotlib.pyplot.title(title)
+    matplotlib.pyplot.xlabel('x')
+    matplotlib.pyplot.ylabel('f(x)')
+    matplotlib.pyplot.grid(True, alpha=0.3)
+    matplotlib.pyplot.legend()
+    matplotlib.pyplot.tight_layout()
 
 print('1) x^3 - 3x^2 + 9x + 3 = 0')
 coeffs = [1, -3, 9, 3]
@@ -65,7 +65,7 @@ print('Строка Горнера для верхней границы:', horne
 transformed = [c * (-1)**i for i, c in enumerate(coeffs)]
 print('Строка Горнера для нижней границы:', horner(transformed, -lo))
 f1 = lambda x: x**3 - 3*x**2 + 9*x + 3
-intervals1 = find_intervals(f1, lo, hi)
+intervals1 = find_intervals(f1, -0.4, -0.3)
 print('Интервалы отделения:', intervals1)
 
 phi1 = lambda x: -3 / (x*x - 3*x + 9)
@@ -86,6 +86,6 @@ for i, x in enumerate(history2):
     print(f'  Итерация {i}: x = {x:.9f}')
 print(f'Ответ: x = {x2:.3f}; итераций: {n2}; невязка = {abs(f2(x2)):.3g}')
 
-plot_graph(f1, -1, 0.5, x1, 'Задание 2.1: кубическое уравнение')
-plot_graph(f2, 0, 3, x2, 'Задание 2.2: (2-x)e^x = 0')
-plt.show()
+plot_graph(f1, -0.6, 0.0, x1, 'Задание 2.1: кубическое уравнение')
+plot_graph(f2, 1.5, 2.5, x2, 'Задание 2.2: (2-x)e^x = 0')
+matplotlib.pyplot.show()
